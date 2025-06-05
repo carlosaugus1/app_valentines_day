@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cápsula do Amor | Nosso Universo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e94584;
+            --primary-dark: #b52e63;
+            --secondary: #ffd6e7;
+            --dark: #1a1a2e;
+            --light: #fef6f9;
+            --accent: #ff9eb7;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .premium-header {
+            text-align: center;
+            padding: 80px 0 40px;
+            position: relative;
+        }
+
+        .premium-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 var(--secondary);
+        }
+
+        .premium-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+
+        .premium-header::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            margin: 30px auto;
+        }
+
+        .couple-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .couple-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid white;
+            box-shadow: 0 15px 40px rgba(233, 69, 132, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .couple-photo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 20px 50px rgba(233, 69, 132, 0.3);
+        }
+
+        .couple-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .couple-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .couple-names::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            margin: 10px auto;
+        }
+
+        .heart-beat {
+            font-size: 3rem;
+            color: var(--primary);
+            animation: heartbeat 1.5s infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .premium-timer {
+            background: linear-gradient(135deg, var(--dark), #2a2a4a);
+            color: white;
+            border-radius: 20px;
+            padding: 50px 30px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(26, 26, 46, 0.3);
+        }
+
+        .premium-timer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+            z-index: 0;
+        }
+
+        .timer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .timer-title span {
+            color: var(--accent);
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timer-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .timer-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-value {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .timer-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .timeline-section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            margin: 15px auto;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--gold));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: var(--primary);
+            border: 4px solid var(--gold);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+            text-align: right;
+        }
+
+        .right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .left::after {
+            right: -12px;
+        }
+
+        .right::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(233, 69, 132, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(233, 69, 132, 0.2);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-text {
+            margin-bottom: 10px;
+        }
+
+        .timeline-photo {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-photo:hover {
+            transform: scale(1.03);
+        }
+
+        .map-section {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(26, 26, 46, 0.1);
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 26, 46, 0.9), transparent);
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .map-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Playlist */
+        .playlist-section {
+            margin: 80px 0;
+        }
+
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .song-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(233, 69, 132, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .song-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(233, 69, 132, 0.2);
+        }
+
+        .song-cover {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .song-info {
+            padding: 20px;
+        }
+
+        .song-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .play-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .play-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .messages-section {
+            margin: 80px 0;
+        }
+
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .message-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(233, 69, 132, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '"';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 10rem;
+            color: var(--secondary);
+            top: -30px;
+            left: -10px;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .message-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(233, 69, 132, 0.2);
+        }
+
+        .message-content {
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .message-date {
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-align: right;
+        }
+
+        .premium-footer {
+            background: linear-gradient(135deg, var(--dark), #2a2a4a);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.8;
+        }
+
+        .footer-love {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .premium-header h1 {
+                font-size: 3rem;
+            }
+
+            .couple-photo {
+                width: 180px;
+                height: 180px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 18px;
+            }
+
+            .left, .right {
+                left: 0;
+                text-align: left;
+            }
+
+            .left::after, .right::after {
+                left: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header class="premium-header">
+        <div class="container">
+            <h1>Cápsula do Amor</h1>
+            <p>Uma jornada através do nosso universo a dois, onde cada momento é uma constelação de memórias brilhantes.</p>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="couple-section">
+            <img src="imagens/ele.jpg" alt="Ele" class="couple-photo">
+            
+            <div class="couple-center">
+                <div class="heart-beat">❤</div>
+                <h2 class="couple-names">Miguel & Sophia</h2>
+                <p>Desde 12 de Junho de 2020</p>
+            </div>
+            
+            <img src="imagens/ela.jpg" alt="Ela" class="couple-photo">
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="premium-timer">
+            <h2 class="timer-title">Nosso <span>Tempo</span> Juntos</h2>
+            <div class="timer-grid" id="timer">
+                <div class="timer-card">
+                    <div class="timer-value" id="years">0</div>
+                    <div class="timer-label">Anos</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-value" id="months">0</div>
+                    <div class="timer-label">Meses</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-value" id="days">0</div>
+                    <div class="timer-label">Dias</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-value" id="hours">0</div>
+                    <div class="timer-label">Horas</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-value" id="minutes">0</div>
+                    <div class="timer-label">Minutos</div>
+                </div>
+                <div class="timer-card">
+                    <div class="timer-value" id="seconds">0</div>
+                    <div class="timer-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section container">
+        <h2 class="section-title">Nossa Linha do Tempo</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">12 Jun 2020</div>
+                    <p class="timeline-text">Nosso primeiro encontro no café da esquina. Choveu muito e dividimos um guarda-chuva.</p>
+                    <img src="imagens/primeiro-encontro.jpg" alt="Primeiro encontro" class="timeline-photo">
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">15 Ago 2020</div>
+                    <p class="timeline-text">Primeira viagem juntos para a praia. Você perdeu o ônibus e eu fiquei esperando por 3 horas.</p>
+                    <img src="imagens/primeira-viagem.jpg" alt="Primeira viagem" class="timeline-photo">
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-date">24 Dez 2020</div>
+                    <p class="timeline-text">Nosso primeiro Natal juntos. Você queimou o peru mas fingi que estava delicioso.</p>
+                    <img src="imagens/natal.jpg" alt="Natal" class="timeline-photo">
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-date">14 Fev 2021</div>
+                    <p class="timeline-text">Primeiro Dia dos Namorados oficial. Você me surpreendeu com um jantar à luz de velas.</p>
+                    <img src="imagens/primeiro-namorados.jpg" alt="Dia dos Namorados" class="timeline-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section container">
+        <h2 class="section-title">Onde Tudo Começou</h2>
+        
+        <div class="map-container">
+            <div id="map" style="width:100%;height:100%;"></div>
+            <div class="map-overlay">
+                <h3 class="map-title">Café das Artes</h3>
+                <p>Rua das Flores, 123 - Centro</p>
+                <p>12 de Junho de 2020 - 20:00</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="playlist-section container">
+        <h2 class="section-title">Nossa Trilha Sonora</h2>
+        
+        <div class="playlist-grid">
+            <div class="song-card">
+                <img src="imagens/musica1.jpg" alt="Capa do álbum" class="song-cover">
+                <div class="song-info">
+                    <h3 class="song-title">Perfect</h3>
+                    <p class="song-artist">Ed Sheeran</p>
+                    <button class="play-btn"><i class="fas fa-play"></i> Ouvir</button>
+                </div>
+            </div>
+            
+            <div class="song-card">
+                <img src="imagens/musica2.jpg" alt="Capa do álbum" class="song-cover">
+                <div class="song-info">
+                    <h3 class="song-title">All of Me</h3>
+                    <p class="song-artist">John Legend</p>
+                    <button class="play-btn"><i class="fas fa-play"></i> Ouvir</button>
+                </div>
+            </div>
+            
+            <div class="song-card">
+                <img src="imagens/musica3.jpg" alt="Capa do álbum" class="song-cover">
+                <div class="song-info">
+                    <h3 class="song-title">A Thousand Years</h3>
+                    <p class="song-artist">Christina Perri</p>
+                    <button class="play-btn"><i class="fas fa-play"></i> Ouvir</button>
+                </div>
+            </div>
+            
+            <div class="song-card">
+                <img src="imagens/musica4.jpg" alt="Capa do álbum" class="song-cover">
+                <div class="song-info">
+                    <h3 class="song-title">Thinking Out Loud</h3>
+                    <p class="song-artist">Ed Sheeran</p>
+                    <button class="play-btn"><i class="fas fa-play"></i> Ouvir</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="messages-section container">
+        <h2 class="section-title">Mensagens do Coração</h2>
+        
+        <div class="messages-grid">
+            <div class="message-card">
+                <p class="message-content">"Lembro do seu sorriso no primeiro encontro. Era tímido mas seus olhos brilhavam como estrelas."</p>
+                <p class="message-date">15/06/2020</p>
+            </div>
+            
+            <div class="message-card">
+                <p class="message-content">"Obrigado por ter paciência com meus defeitos e por me fazer querer ser melhor a cada dia."</p>
+                <p class="message-date">30/07/2020</p>
+            </div>
+            
+            <div class="message-card">
+                <p class="message-content">"Nunca vou esquecer quando você me surpreendeu com aquele café da manhã na cama. Até hoje não sei como não queimou nada."</p>
+                <p class="message-date">12/09/2020</p>
+            </div>
+            
+            <div class="message-card">
+                <p class="message-content">"Seu abraço é meu lugar favorito no mundo inteiro. Não existe sensação melhor do que estar nos seus braços."</p>
+                <p class="message-date">14/02/2021</p>
+            </div>
+            
+            <div class="message-card">
+                <p class="message-content">"Prometo te fazer sorrir todos os dias, mesmo nos dias difíceis. Seu sorriso é meu maior tesouro."</p>
+                <p class="message-date">08/03/2021</p>
+            </div>
+            
+            <div class="message-card">
+                <p class="message-content">"Cada momento ao seu lado é uma página da história mais bonita que eu poderia viver. Mal posso esperar pelo próximo capítulo."</p>
+                <p class="message-date">Hoje</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="footer-logo">Cápsula do Amor</div>
+            <p class="footer-text">Um presente digital eterno para celebrar seu amor. Personalizável com suas fotos, músicas e memórias especiais.</p>
+            <p>© 2023 - Presente perfeito para o Dia dos Namorados</p>
+            <div class="footer-love">Feito com ❤ para casais especiais</div>
+        </div>
+    </footer>
+
+    <script>
+        
+        const config = {
+            
+            couple: {
+                name1: "Miguel",
+                name2: "Sophia",
+                startDate: new Date(2020, 5, 12, 20, 0, 0), // 12 de junho de 2020
+                photos: {
+                    photo1: "imagens/ele.jpg",
+                    photo2: "imagens/ela.jpg"
+                }
+            },
+            
+            
+            timeline: [
+                {
+                    date: "12 Jun 2020",
+                    text: "Nosso primeiro encontro no café da esquina. Choveu muito e dividimos um guarda-chuva.",
+                    image: "imagens/primeiro-encontro.jpg"
+                },
+                
+            ],
+            
+            
+            firstMeet: {
+                place: "Café das Artes",
+                address: "Rua das Flores, 123 - Centro",
+                date: "12 de Junho de 2020 - 20:00",
+                lat: -23.5505, 
+                lng: -46.6333   
+            },
+            
+           
+            playlist: [
+                {
+                    title: "Perfect",
+                    artist: "Ed Sheeran",
+                    cover: "imagens/musica1.jpg",
+                    link: "https://www.youtube.com/watch?v=2Vv-BfVoq4g"
+                },
+               
+            ],
+            
+            messages: [
+                {
+                    content: '"Lembro do seu sorriso no primeiro encontro. Era tímido mas seus olhos brilhavam como estrelas."',
+                    date: "15/06/2020"
+                },
+            ]
+        };
+
+
+        function initParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}vw`;
+            
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function updateLoveTimer() {
+            const now = new Date();
+            const diff = now - config.couple.startDate;
+            
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            let months = (now.getFullYear() - config.couple.startDate.getFullYear()) * 12;
+            months -= config.couple.startDate.getMonth();
+            months += now.getMonth();
+            months = months <= 0 ? 0 : months;
+            
+            const years = Math.floor(months / 12);
+            months = months % 12;
+            
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days % 365;
+            document.getElementById('hours').textContent = hours % 24;
+            document.getElementById('minutes').textContent = minutes % 60;
+            document.getElementById('seconds').textContent = seconds % 60;
+        }
+
+        function initMap() {
+            console.log("Mapa inicializado para:", config.firstMeet.place);
+            
+        }
+
+
+        function setupMusicPlayer() {
+            const playButtons = document.querySelectorAll('.play-btn');
+            
+            playButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+k
+                    console.log("Reproduzindo:", config.playlist[index].title);
+                    window.open(config.playlist[index].link, '_blank');
+                });
+            });
+        }
+
+        function typeWriterEffect() {
+            const messages = document.querySelectorAll('.message-content');
+            
+            messages.forEach((message, index) => {
+                const originalText = message.textContent;
+                message.textContent = '';
+                
+                let i = 0;
+                function typing() {
+                    if (i < originalText.length) {
+                        message.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typing, Math.random() * 50 + 30);
+                    }
+                }
+                
+                setTimeout(typing, index * 500);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.couple-names').textContent = 
+                `${config.couple.name1} & ${config.couple.name2}`;
+            
+            initParticles();
+            initMap();
+            setupMusicPlayer();
+            
+            updateLoveTimer();
+            setInterval(updateLoveTimer, 1000);
+            
+            setTimeout(typeWriterEffect, 2000);
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <!-- Inclua a API do Google Maps com sua chave -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_AQUI&callback=initMap" async defer></script> -->
+</body>
+</html>
